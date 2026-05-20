@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 30% 97%;
+    --foreground: 224 30% 12%;
+    --muted: 220 20% 92%;
+    --muted-foreground: 220 12% 42%;
+    --border: 220 20% 88%;
+    --accent: 220 20% 94%;
+    --accent-foreground: 224 30% 12%;
+    --primary: 250 84% 58%;
+    --primary-foreground: 0 0% 100%;
+    --destructive: 0 72% 55%;
+
+    --glass-bg: 0 0% 100%;
+    --glass-border: 220 30% 80%;
+
+    --blob-1: 250 90% 70%;
+    --blob-2: 190 90% 65%;
+  }
+
+  .dark {
+    --background: 224 30% 7%;
+    --foreground: 220 20% 96%;
+    --muted: 224 20% 14%;
+    --muted-foreground: 220 12% 65%;
+    --border: 224 20% 20%;
+    --accent: 224 20% 16%;
+    --accent-foreground: 220 20% 96%;
+    --primary: 250 90% 70%;
+    --primary-foreground: 224 30% 7%;
+    --destructive: 0 72% 55%;
+
+    --glass-bg: 224 25% 14%;
+    --glass-border: 224 20% 30%;
+
+    --blob-1: 250 90% 55%;
+    --blob-2: 280 90% 55%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .glass {
+    background-color: hsl(var(--glass-bg) / 0.55);
+    border: 1px solid hsl(var(--glass-border) / 0.55);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    box-shadow: 0 8px 32px -12px hsl(0 0% 0% / 0.18);
+  }
+  .dark .glass {
+    background-color: hsl(var(--glass-bg) / 0.45);
+    box-shadow: 0 8px 32px -12px hsl(0 0% 0% / 0.6);
+  }
+}
