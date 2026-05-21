@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Header } from "@/components/Header";
+import { GlassCursor } from "@/components/GlassCursor";
 import { BackgroundGradient } from "@/components/BackgroundGradient";
 import { ShortenForm } from "@/components/ShortenForm";
 import { ShortenResultCard } from "@/components/ShortenResultCard";
