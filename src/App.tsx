@@ -16,6 +16,7 @@ export default function App() {
   return (
     <div className="relative min-h-full">
       <BackgroundGradient />
+      <GlassCursor />
       <Header />
       <main className="mx-auto max-w-3xl px-5 pb-24 pt-10 sm:pt-16">
         <section className="mb-10 text-center">
