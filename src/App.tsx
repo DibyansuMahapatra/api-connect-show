@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Header } from "@/components/Header";
+import { GlassCursor } from "@/components/GlassCursor";
 import { BackgroundGradient } from "@/components/BackgroundGradient";
 import { ShortenForm } from "@/components/ShortenForm";
 import { ShortenResultCard } from "@/components/ShortenResultCard";
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <div className="relative min-h-full">
       <BackgroundGradient />
+      <GlassCursor />
       <Header />
       <main className="mx-auto max-w-3xl px-5 pb-24 pt-10 sm:pt-16">
         <section className="mb-10 text-center">
