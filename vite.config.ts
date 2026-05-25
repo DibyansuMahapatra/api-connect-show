@@ -15,6 +15,7 @@ export default defineConfig({
     emptyOutDir: true, // cleans dist before build
   },
   server: {
-    port: 8081,
-  },
+    host: "0.0.0.0",
+    port: 5173,
+},
 });
