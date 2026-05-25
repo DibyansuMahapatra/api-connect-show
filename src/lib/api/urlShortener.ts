@@ -30,8 +30,3 @@ export async function fetchAllShortUrls(
   );
   return GenericResponseListSchema(UrlShortenerModelSchema).parse(raw);
 }
-
-export function buildRedirectUrl(shortCodeOrUrl: string): string {
-  if (/^https?:\/\//i.test(shortCodeOrUrl)) return shortCodeOrUrl;
-  return `${API_BASE_URL}${BASE}/${shortCodeOrUrl}`;
-}
