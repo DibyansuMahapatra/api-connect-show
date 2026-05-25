@@ -2,7 +2,7 @@ export const API_BASE_URL =
   (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(
     /\/$/,
     ""
-  ) ?? "http://localhost:8080/compactURL";
+  ) ?? "http://localhost:8080";
 
 export class ApiError extends Error {
   constructor(message: string, public status?: number) {
