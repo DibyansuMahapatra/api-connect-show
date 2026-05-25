@@ -1,8 +1,5 @@
 node_modules
 dist
 .lovable
-.env
 .env.example
 .git
-node_modules
-index.html/
