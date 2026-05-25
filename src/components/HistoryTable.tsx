@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Check, ChevronLeft, ChevronRight, Copy, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
-import { fetchAllShortUrls, buildRedirectUrl } from "@/lib/api/urlShortener";
+import { fetchAllShortUrls } from "@/lib/api/urlShortener";
 
 const PAGE_SIZE = 10;
 
@@ -91,7 +91,7 @@ function PagerBtn({
 
 function Row({ row }: { row: { originalUrl: string; shortUrl: string; createdAt?: string | null; clickCount?: number | null } }) {
   const [copied, setCopied] = useState(false);
-  const href = buildRedirectUrl(row.shortUrl);
+  const href = row.shortUrl;
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(href);

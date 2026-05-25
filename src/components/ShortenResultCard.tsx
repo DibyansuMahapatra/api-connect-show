@@ -2,7 +2,6 @@ import { Check, Copy, ExternalLink, Info } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import type { UrlShortenerModel } from "@/lib/api/types";
-import { buildRedirectUrl } from "@/lib/api/urlShortener";
 
 export function ShortenResultCard({
   data,
@@ -12,7 +11,7 @@ export function ShortenResultCard({
   isExisting: boolean;
 }) {
   const [copied, setCopied] = useState(false);
-  const href = buildRedirectUrl(data.shortUrl);
+  const href = data.shortUrl;
 
   const copy = async () => {
     try {
