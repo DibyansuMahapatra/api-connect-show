@@ -133,7 +133,13 @@ export function ShortenForm({ onResult }: Props) {
   };
 
   return (
-    <form onSubmit={submit} className="glass rounded-2xl p-3 sm:p-4">
+  <form onSubmit={submit} className="glass rounded-2xl p-4 sm:p-5">
+    {/* URL SECTION */}
+    <div className="space-y-2">
+      <label className="px-1 text-sm font-medium text-foreground/80">
+        Original URL
+      </label>
+
       <div className="flex flex-col gap-2 sm:flex-row">
         {/* URL input */}
         <input
@@ -142,7 +148,7 @@ export function ShortenForm({ onResult }: Props) {
           placeholder="https://example.com/your-very-long-link"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="flex-1 rounded-xl bg-transparent px-4 py-3 text-base outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/40"
+          className="flex-1 rounded-xl border border-white/10 bg-transparent px-4 py-3 text-base outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/40"
           aria-invalid={!!error}
           aria-label="Long URL"
         />
@@ -161,42 +167,60 @@ export function ShortenForm({ onResult }: Props) {
           Shorten
         </button>
       </div>
+    </div>
 
-      {/* Custom Alias Input */}
-      <div className="mt-2">
+    {/* SEPARATOR */}
+    <div className="my-4 h-px bg-white/10" />
+
+    {/* CUSTOM ALIAS SECTION */}
+    <div className="space-y-2">
+      <div className="flex items-center justify-between px-1">
+        <label className="text-sm font-medium text-foreground/80">
+          Custom Alias
+        </label>
+
+        <span className="text-xs text-muted-foreground">
+          Optional • max 10 chars
+        </span>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-2 backdrop-blur-sm">
         <input
           type="text"
-          placeholder="Custom alias (optional, max 10 chars)"
+          placeholder="my-custom-link"
           value={customAlias}
           maxLength={10}
           onChange={(e) => setCustomAlias(e.target.value)}
-          className="w-full rounded-xl bg-transparent px-4 py-3 text-base outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/40"
+          className="w-full rounded-xl bg-transparent px-3 py-3 text-base outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/40"
         />
-
-        {/* LIVE STATUS INDICATOR */}
-        {customAlias && (
-          <p
-            className={`mt-1 px-2 text-sm ${
-              aliasStatus === "checking"
-                ? "text-yellow-400"
-                : aliasStatus === "available"
-                ? "text-green-500"
-                : aliasStatus === "taken"
-                ? "text-red-500"
-                : "text-muted-foreground"
-            }`}
-          >
-            {aliasStatus === "checking" && "Checking availability..."}
-            {aliasStatus === "available" && "Alias is available"}
-            {aliasStatus === "taken" && "Alias is already taken"}
-          </p>
-        )}
       </div>
 
-      {/* Error */}
-      {error && (
-        <p className="mt-2 px-2 text-sm text-destructive">{error}</p>
+      {/* LIVE STATUS INDICATOR */}
+      {customAlias && (
+        <p
+          className={`px-2 text-sm ${
+            aliasStatus === "checking"
+              ? "text-yellow-400"
+              : aliasStatus === "available"
+              ? "text-green-500"
+              : aliasStatus === "taken"
+              ? "text-red-500"
+              : "text-muted-foreground"
+          }`}
+        >
+          {aliasStatus === "checking" && "Checking availability..."}
+          {aliasStatus === "available" && "Alias is available"}
+          {aliasStatus === "taken" && "Alias is already taken"}
+        </p>
       )}
-    </form>
-  );
+    </div>
+
+    {/* Error */}
+    {error && (
+      <p className="mt-4 px-2 text-sm text-destructive">
+        {error}
+      </p>
+    )}
+  </form>
+);
 }
