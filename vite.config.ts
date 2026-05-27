@@ -3,19 +3,35 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig({
-  root: ".", // <-- make sure root is project root where index.html lives
+  root: ".",
+
   plugins: [react()],
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
+
   build: {
-    outDir: "dist", // default, ensures build output goes to /app/dist
-    emptyOutDir: true, // cleans dist before build
+    outDir: "dist",
+    emptyOutDir: true,
   },
+
   server: {
     host: "0.0.0.0",
     port: 5173,
-},
+
+    watch: {
+      usePolling: true,
+    },
+
+    proxy: {
+      "/compactURL": {
+        target: "http://app:8080",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });
