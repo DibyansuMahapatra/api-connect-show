@@ -1,25 +1,28 @@
 # ---------------------------
-# Stage 1: Dependencies
+# Stage 1: Build
 # ---------------------------
 FROM node:20-alpine AS build
 
 WORKDIR /app
 
 COPY package*.json ./
-
 RUN npm install
 
+COPY . .
+
+RUN npm run build
+
 # ---------------------------
-# Stage 2: Development Runtime
+# Stage 2: Production server
 # ---------------------------
 FROM node:20-alpine
 
 WORKDIR /app
 
-COPY --from=build /app/node_modules ./node_modules
+RUN npm install -g serve
 
-COPY . .
+COPY --from=build /app/dist ./dist
 
-EXPOSE 5173
+EXPOSE 80
 
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["serve", "-s", "dist", "-l", "80"]
