@@ -26,12 +26,12 @@ export default defineConfig({
       usePolling: true,
     },
 
-    proxy: {
-      "/compactURL": {
-        target: "http://app:8080",
-        changeOrigin: true,
-        secure: false,
-      },
-    },
+    // proxy: {
+    //   "/compactURL": {
+    //     target: "http://app:8080",
+    //     changeOrigin: true,
+    //     secure: false,
+    //   },
+    // },
   },
 });

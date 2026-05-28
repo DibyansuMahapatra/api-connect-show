@@ -1,3 +1,10 @@
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "");
+
+if (!API_BASE_URL) {
+  throw new Error("VITE_API_BASE_URL is not defined");
+}
+
 export class ApiError extends Error {
   constructor(message: string, public status?: number) {
     super(message);
@@ -8,18 +15,22 @@ export async function apiFetch<T = unknown>(
   path: string,
   init: RequestInit = {}
 ): Promise<T> {
+
   const controller = new AbortController();
 
   const timeout = setTimeout(() => controller.abort(), 15000);
 
   try {
-    const res = await fetch(path, {
+
+    const res = await fetch(`${API_BASE_URL}${path}`, {
       ...init,
+
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
         ...(init.headers ?? {}),
       },
+
       signal: controller.signal,
     });
 
@@ -28,6 +39,7 @@ export async function apiFetch<T = unknown>(
     const json = text ? safeJson(text) : null;
 
     if (!res.ok) {
+
       const msg =
         (json && (json.errorMessage || json.message)) ||
         `Request failed (${res.status})`;
@@ -36,7 +48,9 @@ export async function apiFetch<T = unknown>(
     }
 
     return json as T;
+
   } catch (err) {
+
     if (err instanceof ApiError) throw err;
 
     if ((err as Error).name === "AbortError") {
@@ -44,8 +58,9 @@ export async function apiFetch<T = unknown>(
     }
 
     throw new ApiError(
-      (err as Error).message || "Network error. Is backend reachable?"
+      (err as Error).message || "Network error"
     );
+
   } finally {
     clearTimeout(timeout);
   }
