@@ -4,37 +4,67 @@ import { useTheme } from "next-themes";
 
 export function UpiQR() {
   const ref = useRef<HTMLDivElement>(null);
+  const qrRef = useRef<QRCodeStyling | null>(null);
   const { resolvedTheme } = useTheme();
 
   const isDark = resolvedTheme === "dark";
 
+  // 🚀 Payment-friendly UPI link
+  const upiLink =
+    "upi://pay?pa=dibyansumahapatra26@okhdfcbank&pn=Dibyansu%20Mahapatra&cu=INR&tn=Support%20c-URL";
+
   useEffect(() => {
     if (!ref.current) return;
 
+    // clear container safely
     ref.current.innerHTML = "";
 
-    const qr = new QRCodeStyling({
-      width: 180,
-      height: 180,
-      data: "upi://pay?pa=dibyansumahapatra26@okhdfcbank&pn=Dibyansu%20Mahapatra&cu=INR",
-      dotsOptions: {
-        color: isDark ? "#ffffff" : "#000000",
-        type: "rounded",
-      },
-      backgroundOptions: {
-        color: "transparent",
-      },
-      imageOptions: {
-        crossOrigin: "anonymous",
-        margin: 5,
-      },
-    });
+    // create QR once
+    if (!qrRef.current) {
+      qrRef.current = new QRCodeStyling({
+        width: 180,
+        height: 180,
+        data: upiLink,
 
-    qr.append(ref.current);
+        dotsOptions: {
+          color: isDark ? "#ffffff" : "#000000",
+          type: "rounded",
+        },
+
+        cornersSquareOptions: {
+          type: "extra-rounded",
+          color: isDark ? "#ffffff" : "#000000",
+        },
+
+        cornersDotOptions: {
+          color: isDark ? "#ffffff" : "#000000",
+        },
+
+        backgroundOptions: {
+          color: "transparent",
+        },
+      });
+    } else {
+      // update theme only (no recreation)
+      qrRef.current.update({
+        data: upiLink,
+        dotsOptions: {
+          color: isDark ? "#ffffff" : "#000000",
+        },
+        cornersSquareOptions: {
+          color: isDark ? "#ffffff" : "#000000",
+        },
+        cornersDotOptions: {
+          color: isDark ? "#ffffff" : "#000000",
+        },
+      });
+    }
+
+    qrRef.current.append(ref.current);
   }, [isDark]);
 
   return (
-    <div className="glass mt-8 rounded-2xl p-6 text-center">
+    <div className="glass mt-8 rounded-2xl p-6 text-center relative overflow-hidden">
       <h2 className="text-xl font-semibold">Support via UPI</h2>
 
       <p className="text-sm text-muted-foreground mt-2">
