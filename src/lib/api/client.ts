@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://compacturl.onrender.com/compactURL/";
+const API_BASE_URL = "https://compacturl.onrender.com";
 
 if (!API_BASE_URL) {
   throw new Error("VITE_API_BASE_URL is not defined");
