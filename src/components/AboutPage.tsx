@@ -1,6 +1,7 @@
 import { Header } from "./Header";
 import { BackgroundGradient } from "./BackgroundGradient";
 import { GlassCursor } from "./GlassCursor";
+import { FloatingThemeToggle } from "./FloatingThemeToggle";
 
 export function AboutPage() {
   return (
@@ -154,6 +155,7 @@ export function AboutPage() {
           </a>
         </section>
       </main>
+      <FloatingThemeToggle />
     </div>
   );
 }
