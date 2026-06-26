@@ -6,6 +6,7 @@ import { ShortenForm } from "./ShortenForm";
 import { ShortenResultCard } from "./ShortenResultCard";
 import { HistoryTable } from "./HistoryTable";
 import type { UrlShortenerModel } from "@/lib/api/types";
+import { FloatingThemeToggle } from "./FloatingThemeToggle";
 
 export function HomePage() {
   const [result, setResult] = useState<{
@@ -64,6 +65,7 @@ export function HomePage() {
           </div>
         </section>
       </main>
+      <FloatingThemeToggle />
     </div>
   );
 }
