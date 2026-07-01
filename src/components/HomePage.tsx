@@ -6,6 +6,7 @@ import { ShortenForm } from "./ShortenForm";
 import { ShortenResultCard } from "./ShortenResultCard";
 import { HistoryTable } from "./HistoryTable";
 import type { UrlShortenerModel } from "@/lib/api/types";
+import { Footer } from "./Footer";
 import { FloatingThemeToggle } from "./FloatingThemeToggle";
 
 export function HomePage() {
@@ -65,6 +66,7 @@ export function HomePage() {
           </div>
         </section>
       </main>
+      <Footer />
       <FloatingThemeToggle />
     </div>
   );
